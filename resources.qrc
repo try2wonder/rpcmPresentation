@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>bulletpoints</file>
+        <file>bpText</file>
+    </qresource>
+</RCC>

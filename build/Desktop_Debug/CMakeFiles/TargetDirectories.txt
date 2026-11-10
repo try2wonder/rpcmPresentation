@@ -1,0 +1,9 @@
+/home/caycay/code/qtProjects/test/build/Desktop_Debug/CMakeFiles/test.dir
+/home/caycay/code/qtProjects/test/build/Desktop_Debug/CMakeFiles/edit_cache.dir
+/home/caycay/code/qtProjects/test/build/Desktop_Debug/CMakeFiles/rebuild_cache.dir
+/home/caycay/code/qtProjects/test/build/Desktop_Debug/CMakeFiles/list_install_components.dir
+/home/caycay/code/qtProjects/test/build/Desktop_Debug/CMakeFiles/install.dir
+/home/caycay/code/qtProjects/test/build/Desktop_Debug/CMakeFiles/install/local.dir
+/home/caycay/code/qtProjects/test/build/Desktop_Debug/CMakeFiles/install/strip.dir
+/home/caycay/code/qtProjects/test/build/Desktop_Debug/CMakeFiles/test_autogen_timestamp_deps.dir
+/home/caycay/code/qtProjects/test/build/Desktop_Debug/CMakeFiles/test_autogen.dir
