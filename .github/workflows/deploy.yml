@@ -9,7 +9,6 @@ on:
 jobs:
   build-and-deploy:
     name: Build on ${{ matrix.os }}
-    runs-size: large
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
