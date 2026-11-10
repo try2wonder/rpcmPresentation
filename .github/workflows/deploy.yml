@@ -11,15 +11,16 @@ jobs:
     name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: windows-latest
             platform: windows
           - os: macos-latest
-            platform: macos
+            platform: mac
 
     steps:
-    # 1. Check out the source code from your repository
+    # 1. Check out the source code
     - name: Checkout repository
       uses: actions/checkout@v4
 
@@ -27,17 +28,17 @@ jobs:
     - name: Install Ninja
       uses: aseprite/get-ninja@main
 
-    # 3. Install the correct Qt6 environment automatically
+    # 3. Install the correct Qt6 environment
     - name: Install Qt6
       uses: jurplel/install-qt-action@v3
       with:
-        version: '6.5.3' # Change this if your local version is different (e.g., 6.6.0)
+        version: '6.5.3' 
         host: '${{ matrix.platform }}'
         target: 'desktop'
         arch: ${{ matrix.platform == 'windows' && 'win64_mingw' || '' }}
         install-deps: 'true'
 
-    # 4. Set up C++ Compiler (GCC for Windows / Clang for macOS)
+    # 4. Set up C++ Compiler (GCC for Windows)
     - name: Set up Compiler (Windows)
       if: matrix.platform == 'windows'
       uses: egor-tensin/setup-gcc@v1
@@ -57,32 +58,28 @@ jobs:
       shell: bash
       run: |
         mkdir dist_windows
-        cp build/YourAppName.exe dist_windows/
-        # Use the windeployqt tool added to your PATH by the install-qt-action
-        windeployqt --dir dist_windows dist_windows/YourAppName.exe
-      # ⚠️ IMPORTANT: Replace "YourAppName.exe" above with your actual executable target name!
+        cp build/test.exe dist_windows/
+        windeployqt --dir dist_windows dist_windows/test.exe
 
     # 7. Run Deployment Tool (macOS)
     - name: Deploy Binaries (macOS)
-      if: matrix.platform == 'macos'
+      if: matrix.platform == 'mac'
       run: |
         mkdir dist_macos
-        # macdeployqt creates a self-contained app bundle structure and wraps it in a DMG
-        macdeployqt build/YourAppName.app -dmg
-        cp build/YourAppName.dmg dist_macos/
-      # ⚠️ IMPORTANT: Replace "YourAppName.app" and "YourAppName.dmg" with your actual targets!
+        macdeployqt build/test.app -dmg
+        cp build/test.dmg dist_macos/
 
     # 8. Upload the finished packages as downloadable GitHub artifacts
     - name: Upload Artifacts (Windows)
       if: matrix.platform == 'windows'
       uses: actions/upload-artifact@v4
       with:
-        name: YourAppName-Windows
+        name: test-Windows
         path: dist_windows/
 
     - name: Upload Artifacts (macOS)
-      if: matrix.platform == 'macos'
+      if: matrix.platform == 'mac'
       uses: actions/upload-artifact@v4
       with:
-        name: YourAppName-macOS
+        name: test-macOS
         path: dist_macos/
